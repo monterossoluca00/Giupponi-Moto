@@ -31,15 +31,6 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.025em;line-
 .kicker{color:var(--blue);margin:0 0 1.4rem}
 .lede{color:#C7CDD3;max-width:46ch;font-size:1.1rem}
 
-/* ---------- LOADER ---------- */
-.loader{position:fixed;inset:0;z-index:99;background:var(--night);display:grid;place-content:center;
-  justify-items:center;gap:26px;transition:opacity .7s ease,visibility .7s}
-.loader.is-out{opacity:0;visibility:hidden}
-.loader__mark{width:min(300px,62vw);opacity:.95}
-.loader__bar{width:min(300px,62vw);height:2px;background:rgba(243,245,247,.14);overflow:hidden}
-.loader__bar span{display:block;height:100%;width:0;background:var(--blue);transition:width .25s ease}
-.loader__txt{color:var(--nickel);margin:0}
-
 /* ---------- HEADER ---------- */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:24px;
   padding:16px var(--pad);transition:background .4s ease,backdrop-filter .4s ease,border-color .4s}

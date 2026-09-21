@@ -13,8 +13,6 @@
   var ready = new Array(SHEETS).fill(false);
   var loadedCount = 0;
 
-  var loader = document.getElementById('loader');
-  var loaderFill = document.getElementById('loaderFill');
   var hdr = document.getElementById('hdr');
   var progressFill = document.getElementById('progressFill');
   var hint = document.getElementById('scrollhint');
@@ -23,9 +21,10 @@
     return { el: el, from: parseFloat(el.dataset.from), to: parseFloat(el.dataset.to), last: -1 };
   });
 
-  /* poster immediato, così non si vede mai il nero vuoto */
-  var poster = new Image();
-  poster.onload = function () { if (!ready[0]) drawImageCover(poster, 0, 0, poster.width, poster.height); };
+  /* poster: 48 KB, arriva molto prima degli sprite sheet e copre l'attesa,
+     così non serve nessuna schermata di caricamento davanti alla pagina */
+  var poster = new Image(), posterReady = false;
+  poster.onload = function () { posterReady = true; render(true); };
   poster.src = 'assets/poster.jpg';
 
   for (var s = 0; s < SHEETS; s++) (function (i) {
@@ -33,24 +32,12 @@
     img.decoding = 'async';
     img.onload = function () {
       ready[i] = true; loadedCount++;
-      loaderFill.style.width = Math.round(loadedCount / SHEETS * 100) + '%';
-      if (i === 0 || (reduce && i === SHEETS - 1)) hideLoader();
-      if (loadedCount === SHEETS) hideLoader();
       render(true);
     };
-    img.onerror = function () { loadedCount++; if (loadedCount >= 1) hideLoader(); };
+    img.onerror = function () { loadedCount++; };
     img.src = 'assets/seq' + i + '.jpg';
     sheets[i] = img;
   })(s);
-
-  var loaderHidden = false;
-  function hideLoader() {
-    if (loaderHidden) return;
-    loaderHidden = true;
-    loader.classList.add('is-out');
-    setTimeout(function () { loader.style.display = 'none'; }, 800);
-  }
-  setTimeout(hideLoader, 4000); // fallback
 
   /* ---------- canvas ---------- */
   var vw = 0, vh = 0, dpr = 1;
@@ -74,7 +61,10 @@
     var si = Math.floor(n / PER);
     if (!ready[si]) {                       // sheet non pronto: tieni l'ultimo valido
       for (var k = si; k >= 0; k--) { if (ready[k]) { si = k; n = k * PER + (PER - 1); break; } }
-      if (!ready[si]) return;
+      if (!ready[si]) {                     // niente ancora: mostra il poster
+        if (posterReady) drawImageCover(poster, 0, 0, poster.width, poster.height);
+        return;
+      }
     }
     var k2 = n % PER;
     drawImageCover(sheets[si], (k2 % COLS) * CW, Math.floor(k2 / COLS) * CH, CW, CH);
