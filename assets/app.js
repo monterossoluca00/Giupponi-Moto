@@ -143,7 +143,19 @@
   render(true);
 
   /* ---------- form richiesta informazioni ---------- */
+  /* INVIO REALE — compila UNA delle due righe qui sotto e il form spedisce da solo.
+     A) Web3Forms: chiave gratuita da web3forms.com (nessun account, la chiave arriva
+        via mail all'indirizzo che indichi: usa info@giupponimoto.net).
+     B) Formspree: incolla l'URL completo del form (https://formspree.io/f/xxxxxxx).
+     Finché restano vuote, il form apre il programma di posta del visitatore. */
+  var WEB3FORMS_KEY = '';
+  var FORM_ENDPOINT = '';
+
+  var DESTINATARIO = 'info@giupponimoto.net';
+  var TELEFONO = '0331 587767';
+
   var form = document.getElementById('infoForm');
+  var feedback = document.getElementById('formFeedback');
 
   /* i bottoni che portano al form preimpostano il tipo di richiesta */
   Array.prototype.forEach.call(document.querySelectorAll('a[href="#informazioni"][data-tipo]'), function (a) {
@@ -155,50 +167,116 @@
       }
     });
   });
-  var feedback = document.getElementById('formFeedback');
+
   if (form) {
+    var btn = form.querySelector('.form__send');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var fields = form.querySelectorAll('[required]');
-      var bad = null;
-      for (var i = 0; i < fields.length; i++) {
-        var f = fields[i];
-        var empty = f.type === 'checkbox' ? !f.checked : !f.value.trim();
-        var wrong = !empty && f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim());
-        f.classList.toggle('is-invalid', empty || wrong);
-        if ((empty || wrong) && !bad) bad = f;
+
+      var campi = form.querySelectorAll('[required]');
+      var primo = null;
+      for (var i = 0; i < campi.length; i++) {
+        var f = campi[i];
+        var vuoto = f.type === 'checkbox' ? !f.checked : !f.value.trim();
+        var errato = !vuoto && f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim());
+        f.classList.toggle('is-invalid', vuoto || errato);
+        if ((vuoto || errato) && !primo) primo = f;
       }
-      if (bad) {
-        feedback.className = 'form__feedback is-error';
-        feedback.textContent = bad.type === 'checkbox'
+      if (primo) {
+        messaggio(primo.type === 'checkbox'
           ? 'Serve il consenso al trattamento dei dati per poterti rispondere.'
-          : 'Controlla i campi evidenziati: manca qualcosa.';
-        bad.focus();
+          : 'Controlla i campi evidenziati: manca qualcosa.', true);
+        primo.focus();
         return;
       }
 
-      var get = function (n) { var el = form.elements[n]; return el ? el.value.trim() : ''; };
+      var v = function (n) { var el = form.elements[n]; return el ? el.value.trim() : ''; };
+      var d = {
+        nome: v('nome'), email: v('email'), telefono: v('telefono'),
+        tipo: v('tipo'), messaggio: v('messaggio')
+      };
       var corpo = [
-        'Nome: ' + get('nome'),
-        'Email: ' + get('email'),
-        'Telefono: ' + (get('telefono') || '—'),
-        'Richiesta: ' + get('tipo'),
+        'Nome: ' + d.nome,
+        'Email: ' + d.email,
+        'Telefono: ' + (d.telefono || '—'),
+        'Richiesta: ' + d.tipo,
         '',
-        get('messaggio'),
+        d.messaggio,
         '',
         '— Inviato dal sito giupponimoto.net'
       ].join('\n');
 
-      window.location.href = 'mailto:info@giupponimoto.net'
-        + '?subject=' + encodeURIComponent('Richiesta informazioni dal sito — ' + get('nome'))
-        + '&body=' + encodeURIComponent(corpo);
-
-      feedback.className = 'form__feedback';
-      feedback.textContent = 'Si apre il tuo programma di posta con la richiesta già scritta: premi invia per mandarla. Se non si apre, scrivici a info@giupponimoto.net o chiama 0331 587767.';
+      if (WEB3FORMS_KEY || FORM_ENDPOINT) spedisci(d, corpo);
+      else apriPosta(d, corpo);
     });
 
     form.addEventListener('input', function (e) {
       if (e.target.classList) e.target.classList.remove('is-invalid');
     });
+  }
+
+  function messaggio(testo, errore) {
+    if (!feedback) return;
+    feedback.className = 'form__feedback' + (errore ? ' is-error' : '');
+    feedback.textContent = testo;
+  }
+
+  function spedisci(d, corpo) {
+    var etichetta = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+    messaggio('');
+
+    var url, dati;
+    if (WEB3FORMS_KEY) {
+      url = 'https://api.web3forms.com/submit';
+      dati = {
+        access_key: WEB3FORMS_KEY,
+        subject: 'Richiesta informazioni dal sito — ' + d.nome,
+        from_name: d.nome,
+        email: d.email,
+        telefono: d.telefono || '—',
+        tipo_richiesta: d.tipo,
+        message: corpo
+      };
+    } else {
+      url = FORM_ENDPOINT;
+      dati = {
+        _subject: 'Richiesta informazioni dal sito — ' + d.nome,
+        nome: d.nome, email: d.email, telefono: d.telefono || '—',
+        tipo_richiesta: d.tipo, messaggio: d.messaggio
+      };
+    }
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(dati)
+    })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || j.success === false) throw new Error(j.message || 'errore');
+          return j;
+        });
+      })
+      .then(function () {
+        form.reset();
+        messaggio('Richiesta inviata, grazie. Ti rispondiamo al più presto. Se hai fretta, chiama lo ' + TELEFONO + '.');
+      })
+      .catch(function () {
+        messaggio('Invio non riuscito. Riprova tra poco, oppure scrivici a ' + DESTINATARIO + ' o chiama lo ' + TELEFONO + '.', true);
+      })
+      .then(function () {
+        btn.disabled = false;
+        btn.textContent = etichetta;
+      });
+  }
+
+  function apriPosta(d, corpo) {
+    window.location.href = 'mailto:' + DESTINATARIO
+      + '?subject=' + encodeURIComponent('Richiesta informazioni dal sito — ' + d.nome)
+      + '&body=' + encodeURIComponent(corpo);
+    messaggio('Si apre il tuo programma di posta con la richiesta già scritta: premi invia per mandarla. Se non si apre, scrivici a ' + DESTINATARIO + ' o chiama lo ' + TELEFONO + '.');
   }
 })();
