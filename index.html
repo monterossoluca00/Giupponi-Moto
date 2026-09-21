@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moto Giupponi</title>
+<meta name="description" content="Moto Giupponi — concessionaria multimarca e officina a Nerviano (MI). Moto nuove, usato selezionato, assistenza meccanica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ============ LOADING ============ -->
+<div class="loader" id="loader">
+  <img src="assets/logo.png" alt="" class="loader__mark">
+  <div class="loader__bar"><span id="loaderFill"></span></div>
+  <p class="loader__txt mono">Caricamento</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" id="hdr">
+  <a class="hdr__logo" href="#top"><img src="assets/logo.png" alt="Moto Giupponi"></a>
+  <nav class="hdr__nav">
+    <a href="#nuovo">Nuovo</a>
+    <a href="#usato">Usato</a>
+    <a href="#officina">Officina</a>
+    <a href="#contatti">Contatti</a>
+    <a href="#informazioni">Informazioni</a>
+  </nav>
+  <a class="hdr__tel mono" href="tel:+390331587767">Chiamaci</a>
+</header>
+
+<div class="progress"><span id="progressFill"></span></div>
+
+<!-- ============ HERO CINEMATICA ============ -->
+<main id="top">
+<section class="cinema" id="cinema">
+  <div class="cinema__sticky">
+    <canvas id="seq" class="cinema__canvas"></canvas>
+    <div class="cinema__veil"></div>
+
+    <div class="beat beat--center" data-from="-0.09" data-to="0.20">
+      <p class="eyebrow mono">Nerviano · Milano</p>
+      <h1>La tua prossima moto,<br>e chi la terrà in forma.</h1>
+      <p class="beat__sub">Vendita e assistenza sotto lo stesso tetto.</p>
+    </div>
+
+    <div class="beat beat--left" data-from="0.23" data-to="0.41">
+      <h2>Otto marchi,<br>un solo interlocutore.</h2>
+      <p class="beat__sub beat__brands">Benelli · Fantic · Keeway · Morbidelli · Benda · Cyclone · TM Racing · Zontes</p>
+    </div>
+
+    <div class="beat beat--right" data-from="0.45" data-to="0.63">
+      <h2>Usato controllato,<br>non solo usato.</h2>
+      <p class="beat__sub">Ogni moto passa dalla nostra officina prima di passare a te.</p>
+    </div>
+
+    <div class="beat beat--left" data-from="0.67" data-to="0.83">
+      <h2>E dopo la vendita?</h2>
+      <p class="beat__sub">Tagliandi, diagnostica multimarca, gomme, garanzia.<br>Assistenza autorizzata MV Agusta.</p>
+    </div>
+
+    <div class="beat beat--final" data-from="0.87" data-to="1.32">
+      <h2>Quella giusta, la riconosci<br>quando la vedi dal vivo.</h2>
+      <div class="cta">
+        <a class="btn btn--solid" href="tel:+390331587767">Chiama 0331 587767</a>
+        <a class="btn" href="#informazioni">Richiedi informazioni</a>
+      </div>
+    </div>
+
+    <div class="scrollhint mono" id="scrollhint">scorri <span>↓</span></div>
+  </div>
+</section>
+
+<!-- ============ POSIZIONAMENTO ============ -->
+<section class="statement">
+  <p class="kicker mono">02 Ruote di Giupponi Enzo — Via Marzorati 9, Nerviano (MI)</p>
+  <p class="statement__txt">Qui scegli la moto, la ritiri, e l'affidi per il tagliando
+  <em>alle stesse persone.</em></p>
+</section>
+
+<!-- ============ NUOVO ============ -->
+<section class="split" id="nuovo">
+  <figure class="split__img">
+    <img src="assets/nuovo.jpg" alt="Showroom con le moto nuove" loading="lazy">
+  </figure>
+  <div class="split__body">
+    <p class="kicker mono">01 — Nuovo</p>
+    <h2 class="h-lg">Otto marchi in showroom,<br>dalla 125 all'adventure.</h2>
+    <p class="lede">Scooter per la città, naked, enduro, maxi-adventure. Ti aiutiamo a scegliere
+    quello che ti serve davvero, non quello che dobbiamo togliere dal piazzale. Preventivo e
+    permuta li definiamo insieme, in chiaro.</p>
+    <ul class="brands">
+      <li><img src="assets/marchi/benelli.png" alt="Benelli" loading="lazy"></li>
+      <li><img src="assets/marchi/fantic.png" alt="Fantic Motor" loading="lazy"></li>
+      <li><img src="assets/marchi/keeway.png" alt="Keeway" loading="lazy"></li>
+      <li><img src="assets/marchi/morbidelli.png" alt="Morbidelli MBP" loading="lazy"></li>
+      <li><img src="assets/marchi/benda.png" alt="Benda" loading="lazy"></li>
+      <li class="is-cyclone"><img src="assets/marchi/cyclone.png" alt="Cyclone" loading="lazy"></li>
+      <li><img src="assets/marchi/tm.png" alt="TM Racing" loading="lazy"></li>
+      <li><img src="assets/marchi/zontes.png" alt="Zontes" loading="lazy"></li>
+    </ul>
+    <p class="brands__note mono">Officina autorizzata MV Agusta</p>
+    <div class="cta">
+      <a class="btn btn--solid" href="https://dealer.moto.it/giupponimoto" target="_blank" rel="noopener">Moto in pronta consegna</a>
+      <a class="btn" href="#informazioni" data-tipo="Prenotazione test ride">Prenota un test ride</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USATO ============ -->
+<section class="split split--rev" id="usato">
+  <figure class="split__img">
+    <img src="assets/usato.jpg" alt="Moto usate esposte in salone" loading="lazy">
+  </figure>
+  <div class="split__body">
+    <p class="kicker mono">02 — Usato</p>
+    <h2 class="h-lg">Usato che passa<br>dalla nostra officina.</h2>
+    <p class="lede">Prima di finire in vetrina, ogni moto viene controllata dai nostri meccanici:
+    freni, gomme, trasmissione, elettronica. Quello che va sistemato lo sistemiamo noi, prima —
+    non dopo, a carico tuo.</p>
+    <dl class="facts">
+      <div><dt class="mono">Controllo</dt><dd>Tagliando e verifica completa prima della consegna</dd></div>
+      <div><dt class="mono">Permuta</dt><dd>Valutiamo la tua moto attuale sul posto</dd></div>
+      <div><dt class="mono">Passaggi</dt><dd>Pratiche e passaggio di proprietà gestiti da noi</dd></div>
+    </dl>
+    <div class="cta">
+      <a class="btn btn--solid" href="https://dealer.moto.it/giupponimoto/Usato" target="_blank" rel="noopener">Catalogo usato</a>
+      <a class="btn" href="#informazioni" data-tipo="Valutazione della mia moto / permuta">Chiedi una valutazione</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFFICINA ============ -->
+<section class="shop" id="officina">
+  <div class="shop__img"><img src="assets/officina.jpg" alt="Moto sui ponti sollevatori in officina" loading="lazy"></div>
+  <div class="shop__inner">
+    <div class="shop__head">
+      <p class="kicker mono">03 — Officina</p>
+      <h2 class="h-lg">L'assistenza non è un reparto a parte.<br>È il motivo per cui torni.</h2>
+    </div>
+    <ul class="shop__list">
+      <li><span class="mono">01</span><h3>Tagliandi e manutenzione</h3><p>Programmata o straordinaria, su tutte le cilindrate.</p></li>
+      <li><span class="mono">02</span><h3>Diagnostica multimarca</h3><p>Strumentazione per centraline e impianti elettronici.</p></li>
+      <li><span class="mono">03</span><h3>Garanzia dei marchi</h3><p>Interventi in garanzia sui marchi che rappresentiamo.</p></li>
+      <li><span class="mono">04</span><h3>Pneumatici</h3><p>Sostituzione, equilibratura, consiglio sulla mescola giusta.</p></li>
+      <li><span class="mono">05</span><h3>Assistenza MV Agusta</h3><p>Officina autorizzata per il marchio.</p></li>
+      <li><span class="mono">06</span><h3>Recupero veicoli</h3><p>Se resti fermo, veniamo a prenderla.</p></li>
+    </ul>
+    <div class="cta">
+      <a class="btn btn--solid" href="#informazioni" data-tipo="Tagliando o intervento in officina">Prenota un intervento</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECENSIONI (Google) ============ -->
+<section class="reviews">
+  <div class="reviews__head">
+    <p class="kicker mono">Dicono di noi su Google</p>
+    <a class="reviews__link mono" href="https://www.google.com/maps/search/?api=1&query=Moto+Giupponi+Via+Marzorati+9+Nerviano" target="_blank" rel="noopener">Tutte le recensioni →</a>
+  </div>
+  <div class="reviews__grid">
+    <blockquote>
+      <p class="stars" aria-label="5 stelle su 5">★★★★★</p>
+      <p>Ho comprato una moto nuova da loro, disponibili in fase di trattativa. Mantengono la tempistica che dichiarano. Ho avuto un piccolo problemino dopo averla ritirata, sono intervenuti con professionalità e sopratutto velocemente. Per ora posso solo parlare bene di questo concessionario.</p>
+      <cite class="mono">Gianluca Montini Bellosio · Local Guide</cite>
+    </blockquote>
+    <blockquote>
+      <p class="stars" aria-label="5 stelle su 5">★★★★★</p>
+      <p>Ho appena acquistato una nuova Morbidelli t1002vx e sono stato trattato molto bene. Concessionaria con ambiente gradevole ed ordinato a gestione familiare con molte moto in esposizione. Ottima esperienza.</p>
+      <cite class="mono">Ettore Deangeli</cite>
+    </blockquote>
+    <blockquote>
+      <p class="stars" aria-label="4 stelle su 5">★★★★<span>★</span></p>
+      <p>Si può girare comodamente nei due saloni, dove si trovano sia moto nuove che usate. L'officina è molto grande. Il titolare, insieme al personale, risponde a tutte le domande.</p>
+      <cite class="mono">Roberto Sommella · Local Guide</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ CONTATTI ============ -->
+<section class="contact" id="contatti">
+  <div class="contact__col">
+    <p class="kicker mono">Dove siamo</p>
+    <h2 class="h-lg">Via Marzorati 9<br>20014 Nerviano (MI)</h2>
+    <p class="lede">Due saloni — nuovo e usato — e l'officina nello stesso stabile.</p>
+    <ul class="links">
+      <li><a href="tel:+390331587767"><span class="mono">Telefono</span> 0331 587767</a></li>
+      <li><a href="mailto:info@giupponimoto.net"><span class="mono">Email</span> info@giupponimoto.net</a></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&query=Via+Marzorati+9+20014+Nerviano+MI" target="_blank" rel="noopener"><span class="mono">Mappa</span> Apri in Google Maps</a></li>
+    </ul>
+  </div>
+  <div class="contact__col">
+    <p class="kicker mono">Orari</p>
+    <table class="hours mono">
+      <tbody>
+        <tr><th>Lunedì</th><td>15–19</td></tr>
+        <tr><th>Martedì</th><td>9–12.30 · 15–19</td></tr>
+        <tr><th>Mercoledì</th><td>9–12.30 · 15–19</td></tr>
+        <tr><th>Giovedì</th><td>9–12.30 · 15–19</td></tr>
+        <tr><th>Venerdì</th><td>9–12.30 · 15–19</td></tr>
+        <tr><th>Sabato</th><td>9–12.30 · 15–18</td></tr>
+        <tr class="is-off"><th>Domenica</th><td>Chiuso</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ RICHIESTA INFORMAZIONI ============ -->
+<section class="ask" id="informazioni">
+  <div class="ask__pitch">
+    <p class="kicker mono">Parliamone</p>
+    <h2 class="h-lg">Hai una moto in mente?<br>Sentiamoci.</h2>
+    <p class="lede">Dicci cosa cerchi — nuovo, usato o un intervento in officina — e ti
+    rispondiamo con disponibilità, tempi e preventivo. Se preferisci fare prima, chiama:
+    in negozio rispondiamo sempre noi.</p>
+    <div class="ask__cta">
+      <a class="btn btn--call" href="tel:+390331587767">
+        <span class="btn__label">Chiama ora</span>
+        <span class="btn__num">0331 587767</span>
+      </a>
+      <a class="btn btn--wa" href="https://wa.me/393405213455" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.04s.87 2.37 1 2.53c.12.16 1.72 2.62 4.16 3.68.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+        <span>Scrivici su WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <form class="form" id="infoForm" novalidate>
+    <div class="form__row">
+      <label for="f-nome">Nome e cognome</label>
+      <input id="f-nome" name="nome" type="text" required autocomplete="name" placeholder="Mario Rossi">
+    </div>
+    <div class="form__grid">
+      <div class="form__row">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="mario@esempio.it">
+      </div>
+      <div class="form__row">
+        <label for="f-tel">Telefono</label>
+        <input id="f-tel" name="telefono" type="tel" autocomplete="tel" placeholder="340 000 0000">
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="f-tipo">Di cosa hai bisogno</label>
+      <select id="f-tipo" name="tipo">
+        <option>Informazioni su una moto nuova</option>
+        <option>Prenotazione test ride</option>
+        <option>Informazioni su una moto usata</option>
+        <option>Valutazione della mia moto / permuta</option>
+        <option>Tagliando o intervento in officina</option>
+        <option>Altro</option>
+      </select>
+    </div>
+    <div class="form__row">
+      <label for="f-msg">Messaggio</label>
+      <textarea id="f-msg" name="messaggio" rows="4" required placeholder="Modello che ti interessa, budget, tempi…"></textarea>
+    </div>
+    <label class="form__check">
+      <input type="checkbox" name="consenso" required>
+      <span>Autorizzo il trattamento dei miei dati per ricevere una risposta a questa richiesta.</span>
+    </label>
+    <button type="submit" class="btn btn--solid form__send">Invia richiesta</button>
+    <p class="form__feedback" id="formFeedback" role="status"></p>
+  </form>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ftr">
+  <img src="assets/logo.png" alt="Moto Giupponi" class="ftr__logo">
+  <div class="ftr__cols">
+    <div><p class="mono">Sede</p><p>Via Marzorati 9<br>20014 Nerviano (MI)</p></div>
+    <div><p class="mono">Contatti</p><p><a href="tel:+390331587767">0331 587767</a><br><a href="mailto:info@giupponimoto.net">info@giupponimoto.net</a></p></div>
+    <div><p class="mono">Cataloghi</p><p><a href="https://dealer.moto.it/giupponimoto" target="_blank" rel="noopener">Nuovo</a><br><a href="https://dealer.moto.it/giupponimoto/Usato" target="_blank" rel="noopener">Usato</a></p></div>
+  </div>
+  <p class="ftr__legal mono">02 Ruote di Giupponi Enzo · Concessionaria e officina moto · Via Marzorati 9, 20014 Nerviano (MI) · P.IVA 13976030968</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
