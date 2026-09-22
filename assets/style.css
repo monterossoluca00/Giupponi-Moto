@@ -22,7 +22,7 @@ body{
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img{max-width:100%;display:block}
-#nuovo,#usato,#officina,#contatti,#informazioni{scroll-margin-top:96px}
+#inizio,#nuovo,#usato,#officina,#contatti,#informazioni{scroll-margin-top:96px}
 a{color:inherit}
 .mono{font-family:var(--mono);font-weight:500;letter-spacing:.11em;
   text-transform:uppercase;font-size:.79rem;font-variant-numeric:tabular-nums}
@@ -83,7 +83,10 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.025em;line-
 .scrollhint{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:4;
   display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;
   padding:15px 30px 11px;background:rgba(7,8,9,.58);backdrop-filter:blur(8px);
-  border:1px solid rgba(74,123,255,.55);transition:opacity .4s;pointer-events:none}
+  border:1px solid rgba(74,123,255,.55);text-decoration:none;cursor:pointer;
+  transition:opacity .4s,background .25s,border-color .25s}
+.scrollhint:hover{background:rgba(7,8,9,.78);border-color:var(--blue)}
+.scrollhint.is-hidden{pointer-events:none}
 .scrollhint__txt{font-family:var(--mono);font-weight:600;font-size:1rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--white);white-space:nowrap}
 .scrollhint__arrow{display:block;animation:bob 1.6s ease-in-out infinite}
